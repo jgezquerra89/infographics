@@ -94,42 +94,64 @@
             <p class="text-xl text-accent-300 max-w-3xl mx-auto">
                 An infographic on the booming games industry, from market size and player demographics to on-the-ground studio operations.
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mt-12">
-                <div class="bg-primary-800 p-6 rounded-lg shadow-md">
-                    <div class="text-5xl font-extrabold mb-2">$472M</div>
-                    <div class="text-lg text-accent-300">Current Market Revenue (2025)</div>
+            <!-- UPDATED 4-METRIC GRID: Focuses on Consumer IAP Growth and Total Jobs -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto mt-12">
+                
+                <!-- 1st Box: 50.8M Gamers (RED) -->
+                <div class="bg-primary-800 p-4 rounded-lg shadow-md border-t-4 border-red-500">
+                    <div class="text-3xl font-extrabold mb-1">50.8M</div>
+                    <div class="text-sm text-neutral-300">Total Gamers</div>
                 </div>
-                <div class="bg-primary-800 p-6 rounded-lg shadow-md">
-                    <div class="text-5xl font-extrabold mb-2">6.7B</div>
-                    <div class="text-lg text-accent-300">Mobile Game Exports (Downloads)</div>
+                
+                <!-- 2nd Box: 65% Growth (TEAL - Corrected) -->
+                <div class="bg-primary-800 p-4 rounded-lg shadow-md border-t-4 border-accent-300">
+                    <div class="text-3xl font-extrabold mb-1">65% Growth</div>
+                    <div class="text-sm text-neutral-300">App & Gaming IAP Revenue</div>
                 </div>
-                <div class="bg-primary-800 p-6 rounded-lg shadow-md">
-                    <div class="text-5xl font-extrabold mb-2">$12</div>
-                    <div class="text-lg text-accent-300">Average Revenue Per User (ARPU)</div>
+
+                <!-- 3rd Box: 6.7 Billion Exports (TEAL) -->
+                <div class="bg-primary-800 p-4 rounded-lg shadow-md border-t-4 border-accent-300">
+                    <div class="text-3xl font-extrabold mb-1">6.7 Billion</div>
+                    <div class="text-sm text-neutral-300">Mobile Export Downloads</div>
+                </div>
+                
+                <!-- 4th Box: 0.5M Jobs (TEAL) -->
+                <div class="bg-primary-800 p-4 rounded-lg shadow-md border-t-4 border-accent-300">
+                    <div class="text-3xl font-extrabold mb-1">0.5M</div>
+                    <div class="text-sm text-neutral-300">Game Development Jobs</div>
                 </div>
             </div>
+            <!-- END UPDATED GRID -->
         </div>
     </header>
 
     <main class="container mx-auto p-6 md:p-12">
+        
+        <!-- ==================================================================== -->
+        <!-- PHASE I HEADING (RED HIGHLIGHT) -->
+        <!-- ==================================================================== -->
+        <h2 class="text-4xl font-bold text-primary-title mb-8 font-title text-center md:col-span-2 mt-4 py-4 bg-neutral-100 rounded-lg shadow-inner border-t-4 border-red-500">
+            Phase I: The Player Market (Consumer Focus)
+        </h2>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
             <!-- 1. The Big Picture: Market at a Glance -->
             <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
                 <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">The Big Picture: Market at a Glance</h2>
                 <p class="text-lg text-neutral-700 mb-6">
-                    Vietnam is no longer just an emerging market; it is now recognized as a <strong class="font-bold">global app powerhouse</strong>. The current gaming market is valued at <strong class="font-bold">$472 Million</strong> (2025), but its financial trajectory is aggressive, expected to grow with a strong CAGR of <strong class="font-bold">9.3%</strong>, reaching over <strong class="font-bold">$620 Million by 2028</strong>
+                    Vietnam is no longer just an emerging market; it is now recognized as a <strong class="font-bold">global app powerhouse</strong>. The market is valued at <strong class="font-bold">$472 Million</strong> (2025), but its future trajectory is the key story: it's projected to grow at a strong **CAGR of 9.3%**, reaching over <strong class="font-bold">$620 Million by 2028</strong>. Domestically, the revenue is split dramatically: Mobile Games account for <strong class="font-bold">$150M</strong> and PC/Console Games contribute the larger share at <strong class="font-bold">$322M</strong>. While Mobile dominates exports, PC/Console is the largest domestic revenue driver.
                 </p>
                 <div class="chart-container">
                     <canvas id="revenueChart"></canvas>
                 </div>
                 <p class="text-center text-neutral-500 mt-4">
-                    This line chart illustrates the steady and impressive revenue forecast, highlighting the market's strong potential and trajectory.
+                    This line chart clearly illustrates the aggressive growth forecast and market momentum through 2028.
                 </p>
             </div>
 
-            <!-- 2. Who is the Vietnamese Gamer? -->
-            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+            <!-- 2. Who is the Vietnamese Gamer? (RED BORDER) -->
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
                 <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">Who is the Vietnamese Gamer?</h2>
                 <p class="text-lg text-neutral-700 mb-6">
                     Understanding the player is key. The Vietnamese gamer demographic is remarkably balanced and digitally native. Gen Z forms the largest cohort, and the player base is almost evenly split by gender. Device usage is overwhelmingly mobile-first, with <strong class="font-bold">61.7% of players using Android</strong> and <strong class="font-bold">37.3% using iOS</strong>.
@@ -171,8 +193,8 @@
                 </div>
             </div>
 
-            <!-- 3a. How They Play: Platforms -->
-            <div class="bg-white rounded-lg shadow-md p-6">
+            <!-- 3a. How They Play: Platforms (RED BORDER) -->
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
                 <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">How They Play: Platforms</h2>
                 <p class="text-lg text-neutral-700 mb-6">
                     While mobile is the platform of export and scale, the domestic revenue split is highly unusual. The PC/Console segment accounts for <strong class="font-bold">$322 Million</strong> of the domestic market, making it the highest revenue driver, despite mobile being the primary device for consumption.
@@ -185,8 +207,8 @@
                 </p>
             </div>
 
-            <!-- 3b. How They Pay: Monetization Challenges -->
-            <div class="bg-white rounded-lg shadow-md p-6">
+            <!-- 3b. How They Pay: Monetization Challenges (RED BORDER) -->
+            <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
                 <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">How They Pay: Monetization Challenges</h2>
                 <p class="text-lg text-neutral-700 mb-6">
                     Monetization remains the biggest hurdle. The average revenue per user (ARPU) is only <strong class="font-bold">$12</strong>, far below the global average. Most players prefer Free-to-Play, and payment methods are highly fragmented and localized, creating friction for international publishers.
@@ -199,7 +221,8 @@
                 </p>
             </div>
             
-            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+            <!-- 4. What They Play: Top Genres & Market Leaders (RED BORDER) -->
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
                 <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">What They Play: Top Genres & Market Leaders</h2>
                 <p class="text-lg text-neutral-700 mb-6">
                     Player preferences diverge significantly between platforms. The mobile scene is dominated by deep, engaging <strong class="font-bold">RPGs</strong> and <strong class="font-bold">Strategy</strong> games, alongside accessible <strong class="font-bold">Puzzle</strong> titles. Local leaders like VNG and Garena maintain market dominance.
@@ -265,9 +288,22 @@
                     <p class="text-xs text-neutral-700"><strong class="font-bold">iKame</strong> won the Best of Vietnam User Growth Champion, and <strong class="font-bold">ABI Game Studio</strong> won the Best of Vietnam Rising App award.</p>
                 </div>
             </div>
-
-            <!-- 4. The Studio Engine: Operational Insights -->
-            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+            
+        </div>
+        <!-- END PHASE I -->
+        
+        
+        <!-- ==================================================================== -->
+        <!-- PHASE II HEADING (TEAL HIGHLIGHT) -->
+        <!-- ==================================================================== -->
+        <h2 class="text-4xl font-bold text-primary-title mb-8 font-title text-center md:col-span-2 mt-12 py-4 bg-neutral-100 rounded-lg shadow-inner border-t-4 border-accent-300">
+            Phase II: The Developer & Strategic Landscape (Studio Focus)
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- 5. The Studio Engine: Operational Insights (TEAL BORDER) -->
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6 border-l-4 border-accent-300">
                 <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">The Studio Engine: On-the-Ground Insights</h2>
                 <p class="text-lg text-neutral-700 mb-6">
                     Beyond the high-level numbers, on-the-ground analysis of local studios reveals a fascinating duality. Vietnamese teams possess incredible speed and trend-spotting abilities, but often lack the deep processes and strategic long-term planning of Western counterparts. This creates a unique operational dynamic.
@@ -393,10 +429,9 @@
                 </div>
             </div>
             <!-- END Studio Engine Card -->
-
-
-            <!-- 5. Vietnam’s Strategic Pivot: Insights from Google Apps Summit -->
-            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+            
+            <!-- 6. Vietnam’s Strategic Pivot: Insights from Google Apps Summit (TEAL BORDER) -->
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6 border-l-4 border-accent-300">
                 <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">Vietnam’s Strategic Pivot: Insights from Google Apps Summit</h2>
                 <p class="text-lg text-neutral-700 mb-6">
                     The recent Google Apps Summit confirmed Vietnam's status as a top global export hub (6.7 billion downloads, surpassing China) and highlighted a shift in focus toward long-term, sustainable growth via hybrid monetization and leveraging AI for competitive advantage.
@@ -424,8 +459,8 @@
             </div>
             <!-- END Strategic Pivot Card -->
 
-            <!-- 6. Government & Regulation -->
-            <div class="bg-white rounded-lg shadow-md p-6 md:col-span-2">
+            <!-- 7. Government & Regulation (TEAL BORDER) -->
+            <div class="bg-white rounded-lg shadow-md p-6 md:col-span-2 border-l-4 border-accent-300">
                 <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">Government & Regulation</h2>
                 <p class="text-lg text-neutral-700 mb-6">
                     The government's stance is primarily supportive of the digital economy, recognizing the value of the game industry for job creation and technological development. However, the regulatory landscape includes specific controls, particularly around content, licensing, and access for minors.
@@ -447,8 +482,8 @@
             </div>
             <!-- END Government Support Card -->
 
-            <!-- 7. Conclusion: Strategic Implications and Outlook -->
-            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+            <!-- 8. Conclusion: Strategic Implications and Outlook (TEAL BORDER) -->
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6 border-l-4 border-accent-300">
                 <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">Strategic Implications for Global Partners & Outlook</h2>
                 <!-- PARAGRAPH 1: Final Consolidated Plain Text -->
                 <p class="text-lg text-neutral-700 mb-6">
@@ -462,7 +497,7 @@
                             <span class="text-3xl mr-3 text-red-500">&#9888;</span> Competitive Threats
                         </h3>
                         <ul class="space-y-3 list-disc list-inside text-neutral-700 pl-4">
-                            <li><strong class="font-bold">Hyper-Competitive UA:</strong> Vietnamese studios are your competitors on major UA networks, leveraging extremely low development costs to sustain aggressive creative wars and campaigns globally.</li>
+                            <li><strong class="font-bold">Hyper-Competitive UA:</strong> Vietnamese studios are your competitors on major UA networks, leveraging extremely low development costs to sustain aggressive ROAS campaigns globally.</li>
                             <li><strong class="font-bold">Speed of Replication:</strong> Their rapid execution speed means successful Western concepts are copied and exported worldwide within weeks.</li>
                             <li><strong class="font-bold">Revenue Shift:</strong> The global app economy is rebalancing towards APAC; Western markets are seeing slower growth compared to Vietnam's export explosion.</li>
                         </ul>
@@ -540,6 +575,10 @@
             <!-- Data Source Text -->
             <p class="text-xs text-neutral-400">
                 Data synthesized from industry reports, experts, and on-the-ground studio analysis.
+            </p>
+
+            <p class="text-xs text-neutral-400">
+                This is a non-commercial infographic created for informational purposes. No SVG or Mermaid JS used in construction.
             </p>
         </div>
     </footer>
