@@ -1,0 +1,728 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Lato:wght@700;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+    .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 300px;
+        max-height: 400px;
+    }
+    @media (min-width: 768px) {
+        .chart-container {
+            height: 350px;
+        }
+    }
+    .chart-container-sm {
+        position: relative;
+        width: 100%;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 280px;
+        max-height: 350px;
+    }
+    /* Custom class for H2 titles to enforce Lato font */
+    .title-font {
+        font-family: 'Lato', sans-serif;
+    }
+    /* Ensure the logo container is responsive and centers the image */
+    .logo-wrapper {
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
+        height: auto;
+    }
+    /* Custom list style for the genre card alignment fix */
+    .rank-list-item {
+        height: 48px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem; 
+    }
+</style>
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                colors: {
+                    primary: {
+                        '900': '#0c181e', 
+                        '800': '#1f2a33', 
+                        'title': '#0d1b21', 
+                    },
+                    accent: {
+                        '700': '#004AAD',
+                        '600': '#005BC5',
+                        '500': '#0074E0',
+                        '400': '#1AA7FF',
+                        '300': '#1ac7c3', 
+                    },
+                    neutral: {
+                        '900': '#111827',
+                        '700': '#374151',
+                        '500': '#6B7281',
+                        '100': '#F3F4F6',
+                        '50': '#F8F9FA',
+                    }
+                },
+                fontFamily: {
+                    sans: ['Roboto', 'sans-serif'], 
+                    title: ['Lato', 'sans-serif'],
+                }
+            }
+        }
+    }
+</script>
+<div class="bg-neutral-50 text-neutral-900 font-sans">
+    <header class="text-center py-16 bg-primary-900 text-white shadow-lg">
+        <div class="container mx-auto px-6">
+            <div class="logo-wrapper mb-8">
+                <img src="https://raw.githubusercontent.com/jgezquerra89/momentumlogos/main/Pulse.png"
+                     alt="MOMENTUM Pulse Logo"
+                     class="w-full h-auto object-contain"
+                     style="max-height: 80px;">
+            </div>
+            
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 font-title">Vietnam's Game-Winning Era</h1>
+            <p class="text-xl text-accent-300 max-w-3xl mx-auto">
+                An infographic on the booming games industry, from market size and player demographics to on-the-ground studio operations.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto mt-12">
+                <div class="bg-primary-800 p-6 rounded-lg shadow-md">
+                    <div class="text-5xl font-extrabold mb-2">$472M</div>
+                    <div class="text-lg text-accent-300">Current Market Revenue (2025)</div>
+                </div>
+                <div class="bg-primary-800 p-6 rounded-lg shadow-md">
+                    <div class="text-5xl font-extrabold mb-2">6.7B</div>
+                    <div class="text-lg text-accent-300">Mobile Game Exports (Downloads)</div>
+                </div>
+                <div class="bg-primary-800 p-6 rounded-lg shadow-md">
+                    <div class="text-5xl font-extrabold mb-2">$12</div>
+                    <div class="text-lg text-accent-300">Average Revenue Per User (ARPU)</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-6 md:p-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <!-- 1. The Big Picture: Market at a Glance -->
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">The Big Picture: Market at a Glance</h2>
+                <p class="text-lg text-neutral-700 mb-6">
+                    Vietnam is not just an emerging market; it is now recognized as a <strong class="font-bold">global app powerhouse</strong>. The current gaming market is valued at <strong class="font-bold">$472 Million</strong>. This revenue is split dramatically, with Mobile Games accounting for <strong class="font-bold">$150M</strong> and PC/Console Games contributing <strong class="font-bold">$322M</strong>. While Mobile dominates exports, PC/Console is the largest domestic revenue driver.
+                </p>
+                <div class="chart-container">
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <p class="text-center text-neutral-500 mt-4">
+                    This line chart illustrates the steady and impressive revenue forecast, highlighting the market's strong potential and trajectory.
+                </p>
+            </div>
+
+            <!-- 2. Who is the Vietnamese Gamer? -->
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">Who is the Vietnamese Gamer?</h2>
+                <p class="text-lg text-neutral-700 mb-6">
+                    Understanding the player is key. The Vietnamese gamer demographic is remarkably balanced and digitally native. Gen Z forms the largest cohort, and the player base is almost evenly split by gender. Device usage is overwhelmingly mobile-first, with <strong class="font-bold">61.7% of players using Android</strong> and <strong class="font-bold">37.3% using iOS</strong>.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+                    <div class="flex flex-col items-center">
+                        <h3 class="text-xl font-semibold mb-2">Age Distribution</h3>
+                        <div class="chart-container-sm">
+                            <canvas id="ageChart"></canvas>
+                        </div>
+                        <div class="h-24 flex items-center">
+                            <p class="text-center text-neutral-500 mt-4">
+                                Gen Z (18-24) and young Millennials (25-34) dominate the market, making up the vast majority of players.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <h3 class="text-xl font-semibold mb-2">Gender Split</h3>
+                        <div class="chart-container-sm">
+                            <canvas id="genderChart"></canvas>
+                        </div>
+                        <div class="h-24 flex items-center">
+                            <p class="text-center text-neutral-500 mt-4">
+                                The market shows a near-even split, with 53% male and 47% female gamers, debunking outdated stereotypes.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <h3 class="text-xl font-semibold mb-2">Location</h3>
+                        <div class="chart-container-sm">
+                            <canvas id="locationChart"></canvas>
+                        </div>
+                        <div class="h-24 flex items-center">
+                            <p class="text-center text-neutral-500 mt-4">
+                                A large majority (65%) of players live in urban areas, benefiting from better internet infrastructure.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3a. How They Play: Platforms -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">How They Play: Platforms</h2>
+                <p class="text-lg text-neutral-700 mb-6">
+                    While mobile is the platform of export and scale, the domestic revenue split is highly unusual. The PC/Console segment accounts for <strong class="font-bold">$322 Million</strong> of the domestic market, making it the highest revenue driver, despite mobile being the primary device for consumption.
+                </p>
+                <div class="chart-container">
+                    <canvas id="platformChart"></canvas>
+                </div>
+                <p class="text-center text-neutral-500 mt-4">
+                    This pie chart shows the stark difference in domestic revenue share between Mobile and PC/Console.
+                </p>
+            </div>
+
+            <!-- 3b. How They Pay: Monetization Challenges -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">How They Pay: Monetization Challenges</h2>
+                <p class="text-lg text-neutral-700 mb-6">
+                    Monetization remains the biggest hurdle. The average revenue per user (ARPU) is only <strong class="font-bold">$12</strong>, far below the global average. Most players prefer Free-to-Play, and payment methods are highly fragmented and localized, creating friction for international publishers.
+                </p>
+                <div class="chart-container">
+                    <canvas id="paymentChart"></canvas>
+                </div>
+                <p class="text-center text-neutral-500 mt-4">
+                    The chart illustrates the fragmented payment mix: E-Wallets (<strong class="font-bold">31%</strong>), Cards (<strong class="font-bold">27%</strong>), Bank Transfer (<strong class="font-bold">21%</strong>), and Cash (<strong class="font-bold">18%</strong>). This complexity necessitates local payment integration for success.
+                </p>
+            </div>
+            
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">What They Play: Top Genres & Market Leaders</h2>
+                <p class="text-lg text-neutral-700 mb-6">
+                    Player preferences diverge significantly between platforms. The mobile scene is dominated by deep, engaging <strong class="font-bold">RPGs</strong> and <strong class="font-bold">Strategy</strong> games, alongside accessible <strong class="font-bold">Puzzle</strong> titles. Local leaders like VNG and Garena maintain market dominance.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+                    <!-- Top Mobile Genres -->
+                    <div class="text-center">
+                        <h3 class="text-xl font-semibold mb-3 text-primary-title border-b-2 border-neutral-300 pb-2">Top Mobile Genres</h3>
+                        <ul class="space-y-2 pt-2">
+                            <li class="bg-neutral-100 rounded-md text-center text-lg rank-list-item">1. Role-Playing (RPG)</li>
+                            <li class="bg-neutral-100 rounded-md text-center text-lg rank-list-item">2. Strategy</li>
+                            <li class="bg-neutral-100 rounded-md text-center text-lg rank-list-item">3. Puzzle</li>
+                        </ul>
+                    </div>
+                    <!-- Top PC Genres -->
+                    <div class="text-center">
+                        <h3 class="text-xl font-semibold mb-3 text-primary-title border-b-2 border-neutral-300 pb-2">Top PC Genres</h3>
+                        <ul class="space-y-2 pt-2">
+                            <li class="bg-neutral-100 rounded-md text-center text-lg rank-list-item">1. MOBA</li>
+                            <li class="bg-neutral-100 rounded-md text-center text-lg rank-list-item">2. First-Person Shooter (FPS)</li>
+                            <li class="bg-neutral-100 rounded-md text-center text-lg rank-list-item">3. MMORPG</li>
+                        </ul>
+                    </div>
+                    <!-- Top Publishers (Revenue) -->
+                    <div class="text-center">
+                        <h3 class="text-xl font-semibold mb-3 text-primary-title border-b-2 border-neutral-300 pb-2">Top Publishers (Revenue)</h3>
+                        <ol class="space-y-2 pt-2">
+                            <li class="flex items-center bg-neutral-100 rounded-md text-lg rank-list-item">
+                                <span class="text-xl font-bold text-accent-300 w-8">1.</span>
+                                <span>VNG</span>
+                            </li>
+                            <li class="flex items-center bg-neutral-100 rounded-md text-lg rank-list-item">
+                                <span class="text-xl font-bold text-accent-300 w-8">2.</span>
+                                <span>Garena</span>
+                            </li>
+                            <li class="flex items-center bg-neutral-100 rounded-md text-lg rank-list-item">
+                                <span class="text-xl font-bold text-accent-300 w-8">3.</span>
+                                <span>VTC</span>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="mt-6 p-4 bg-neutral-100 rounded-lg border-l-4 border-accent-300">
+                    <h4 class="font-bold text-sm text-primary-title mb-1">Recent Local Excellence (Google Apps Summit)</h4>
+                    <p class="text-xs text-neutral-700"><strong class="font-bold">iKame</strong> won the Best of Vietnam User Growth Champion, and <strong class="font-bold">ABI Game Studio</strong> won the Best of Vietnam Rising App award.</p>
+                </div>
+            </div>
+
+            <!-- 4. The Studio Engine: Operational Insights -->
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">The Studio Engine: On-the-Ground Insights</h2>
+                <p class="text-lg text-neutral-700 mb-6">
+                    Beyond the high-level numbers, on-the-ground analysis of local studios reveals a fascinating duality. Vietnamese teams possess incredible speed and trend-spotting abilities, but often lack the deep processes and strategic long-term planning of Western counterparts. This creates a unique operational dynamic.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    <!-- Strengths Column -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary-title mb-3 font-title border-b-4 border-accent-300 pb-2">Strengths: The "Go-Fast" Engine</h3>
+                        <div class="space-y-4 pt-2">
+                            
+                            <!-- UPDATED STRENGTH: Cost-Effective Talent -->
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-accent-300 shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-accent-300">&#x2713;</span> Cost-Effective Talent
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">Average cost per developer is extremely low, around <strong class="font-bold">50% less</strong> than the average developer in LATAM, <strong class="font-bold">60-70% less</strong> than the average developer in Europe, and <strong class="font-bold">80% less</strong> than the average developer in the US.</p>
+                            </div>
+
+                            <!-- NEW STRENGTH: AI Leadership -->
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-accent-300 shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-accent-300">&#x2713;</span> AI Leadership
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">Studios are rapidly integrating AI for code review, asset creation, and UA optimization, dramatically increasing efficiency.</p>
+                            </div>
+                            
+                            <!-- Existing Strengths -->
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-accent-300 shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-accent-300">&#x2713;</span> Rapid Creatives
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">New creatives are developed in very quick turnarounds.</p>
+                            </div>
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-accent-300 shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-accent-300">&#x2713;</span> Market Scouting
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">Teams constantly scout digital intelligence tools for new trends.</p>
+                            </div>
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-accent-300 shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-accent-300">&#x2713;</span> ROAS-Driven
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">Campaigns are highly focused on ROAS, with extremely short payback windows.</p>
+                            </div>
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-accent-300 shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-accent-300">&#x2713;</span> Top Networks
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">Applovin is the #1 performing UA network for most.</p>
+                            </div>
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-accent-300 shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-accent-300">&#x2713;</span> Quick Execution
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">Extremely fast at learning, changing, and executing on existing ideas.</p>
+                            </div>
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-accent-300 shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-accent-300">&#x2713;</span> User Segmentation
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">Basic but effective segmentation based on attribution.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Weaknesses Column -->
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary-title mb-3 font-title border-b-4 border-primary-title pb-2">Weaknesses: The Need for Process</h3>
+                        <div class="space-y-4 pt-2">
+                            <!-- Weakness 1 -->
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-primary-title shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-primary-title">&#x2717;</span> Lack of Process
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">Little use of structured processes which lead to scalability issues.</p>
+                            </div>
+                            <!-- Weakness 2 -->
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-primary-title shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-primary-title">&#x2717;</span> Lack of Long Term Strategy
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">Focus is on short-term execution, not long-term roadmaps or strategy.</p>
+                            </div>
+                            <!-- Weakness 3 -->
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-primary-title shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-primary-title">&#x2717;</span> Insufficient Testing
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">A/B testing is done, but often lacks the necessary rigor to be meaningful.</p>
+                            </div>
+                            <!-- Weakness 4 -->
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-primary-title shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-primary-title">&#x2717;</span> Feedback Gaps
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">Teams execute quickly but are not used to getting feedback rounds, leading to suboptimal releases.</p>
+                            </div>
+                            <!-- Weakness 5 -->
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-primary-title shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-primary-title">&#x2717;</span> Risk Averse
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">Hesitant to increase payback windows or try new things, potentially limiting scale.</p>
+                            </div>
+                            <!-- Weakness 6 -->
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-primary-title shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-primary-title">&#x2717;</span> Shallow Analysis
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">Tend to repeat patterns without a deep critical analysis of *why* something works.</p>
+                            </div>
+                            <!-- Weakness 7 -->
+                            <div class="bg-neutral-50 p-4 rounded-lg border-l-4 border-primary-title shadow-sm">
+                                <h4 class="text-lg font-semibold text-neutral-900 flex items-center">
+                                    <span class="text-xl mr-3 text-primary-title">&#x2717;</span> Language Barrier
+                                </h4>
+                                <p class="text-sm text-neutral-700 ml-7">Most developers struggle communicating in English. Translators are often required.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END Studio Engine Card -->
+
+
+            <!-- 5. Vietnam’s Strategic Pivot: Insights from Google Apps Summit -->
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">Vietnam’s Strategic Pivot: Insights from Google Apps Summit</h2>
+                <p class="text-lg text-neutral-700 mb-6">
+                    The recent Google Apps Summit confirmed Vietnam's status as a top global export hub (6.7 billion downloads, surpassing China) and highlighted a shift in focus toward long-term, sustainable growth via hybrid monetization and leveraging AI for competitive advantage.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4 text-center">
+                    
+                    <div class="p-5 bg-neutral-100 rounded-lg border-b-4 border-accent-300 shadow-md">
+                        <h3 class="text-4xl font-extrabold text-accent-300 mb-2">Hybrid Default</h3>
+                        <p class="text-lg font-semibold text-primary-title">New Monetization Focus</p>
+                        <p class="text-sm text-neutral-700">Studios are moving away from pure Hyper-Casual to layering <strong class="font-bold">IAP on top of Ads</strong> to boost long-term value (LTV).</p>
+                    </div>
+                    
+                    <div class="p-5 bg-neutral-100 rounded-lg border-b-4 border-accent-300 shadow-md">
+                        <h3 class="text-4xl font-extrabold text-accent-300 mb-2">AI as Table Stakes</h3>
+                        <p class="text-lg font-semibold text-primary-title">Operational Competitive Edge</p>
+                        <p class="text-sm text-neutral-700"><strong class="font-bold">90%</strong> of global developers use AI. Local studios are integrating Gemini for code review and seeing up to a <strong class="font-bold">40% increase</strong> in ad content output with Gemini.</p>
+                    </div>
+                    
+                    <div class="p-5 bg-neutral-100 rounded-lg border-b-4 border-accent-300 shadow-md">
+                        <h3 class="text-4xl font-extrabold text-accent-300 mb-2">Precision Formula</h3>
+                        <p class="text-lg font-semibold text-primary-title">New Success Blueprint</p>
+                        <p class="text-sm text-neutral-700">App Success = Product x <strong class="font-bold">Precision</strong> x Monetization, emphasizing the right audience and right AI features.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- END Strategic Pivot Card -->
+
+            <!-- 6. Government & Regulation -->
+            <div class="bg-white rounded-lg shadow-md p-6 md:col-span-2">
+                <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">Government & Regulation</h2>
+                <p class="text-lg text-neutral-700 mb-6">
+                    The government's stance is primarily supportive of the digital economy, recognizing the value of the game industry for job creation and technological development. However, the regulatory landscape includes specific controls, particularly around content, licensing, and access for minors.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-neutral-50 p-4 rounded-md border-l-4 border-accent-300 shadow-sm">
+                        <h3 class="text-xl font-semibold text-primary-title mb-2">Pro-Development Policy</h3>
+                        <p class="text-sm text-neutral-700">The government offers tax incentives and favorable policies to encourage the growth of domestic digital content creation and high-tech startups.</p>
+                    </div>
+                    <div class="bg-neutral-50 p-4 rounded-md border-l-4 border-accent-300 shadow-sm">
+                        <h3 class="text-xl font-semibold text-primary-title mb-2">Licensing Requirement</h3>
+                        <p class="text-sm text-neutral-700">All games published in Vietnam must obtain a content license from the Ministry of Information and Communications (MIC) before launch, impacting time-to-market.</p>
+                    </div>
+                    <div class="bg-neutral-50 p-4 rounded-md border-l-4 border-accent-300 shadow-sm">
+                        <h3 class="text-xl font-semibold text-primary-title mb-2">Age & Content Control</h3>
+                        <p class="text-sm text-neutral-700">Strict regulations exist to protect minors, including time limits for online games and content restrictions that limit violence, gambling, or political themes.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- END Government Support Card -->
+
+            <!-- 7. Conclusion: Strategic Implications and Outlook -->
+            <div class="md:col-span-2 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-3xl font-bold text-primary-title mb-4 font-title">Strategic Implications for Global Partners & Outlook</h2>
+                <!-- PARAGRAPH 1: Final Consolidated Plain Text -->
+                <p class="text-lg text-neutral-700 mb-6">
+                    Vietnam’s unique dual role as a high-volume exporter and a cost-effective development hub presents both competitive threats and major opportunities for established Western studios and publishers. Success requires recognizing these market dynamics, building defense and taking advantage. <span class="italic">Momentum Games Consulting</span> can help you navigate this competitive landscape to come ahead.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                    
+                    <div class="p-4 bg-neutral-50 rounded-lg border-l-4 border-red-500 shadow-sm">
+                        <h3 class="text-xl font-semibold text-primary-title mb-2 flex items-center">
+                            <span class="text-3xl mr-3 text-red-500">&#9888;</span> Competitive Threats
+                        </h3>
+                        <ul class="space-y-3 list-disc list-inside text-neutral-700 pl-4">
+                            <li><strong class="font-bold">Hyper-Competitive UA:</strong> Vietnamese studios are your competitors on major UA networks, leveraging extremely low development costs to sustain aggressive ROAS campaigns globally.</li>
+                            <li><strong class="font-bold">Speed of Replication:</strong> Their rapid execution speed means successful Western concepts are copied and exported worldwide within weeks.</li>
+                            <li><strong class="font-bold">Revenue Shift:</strong> The global app economy is rebalancing towards APAC; Western markets are seeing slower growth compared to Vietnam's export explosion.</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-4 bg-neutral-50 rounded-lg border-l-4 border-accent-300 shadow-sm">
+                        <h3 class="text-xl font-semibold text-primary-title mb-2 flex items-center">
+                            <span class="text-3xl mr-3 text-accent-300">&#9733;</span> Partnership Opportunities
+                        </h3>
+                        <ul class="space-y-3 list-disc list-inside text-neutral-700 pl-4">
+                            <li><strong class="font-bold">Co-Development/Outsourcing:</strong> Leverage the 80% lower developer cost for non-core development, asset creation, and rapid prototyping.</li>
+                            <li><strong class="font-bold">Process Mentorship:</strong> Partnering can offer Western studios a way to commercialize new products faster in exchange for installing mature production and monetization processes (e.g., backlog, GDDs).</li>
+                            <li><strong class="font-bold">Local Market Access:</strong> Use Vietnamese partners to navigate the complex local payment landscape (fragmented wallets) and regulatory hurdles (MIC licensing) for domestic releases.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-primary-title mb-4 font-title mt-8">Vietnam's Strategic Outlook: The Four Global Priorities</h3>
+                <p class="text-lg text-neutral-700 mb-8">
+                    The market is rapidly maturing, moving past simple volume toward sustainable long-term value (LTV). Based on the latest industry data, the focus is now on achieving success through high-level strategic alignment.
+                </p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <div class="p-4 bg-neutral-100 rounded-lg border-t-4 border-accent-300 shadow-sm text-center">
+                        <h3 class="text-4xl font-extrabold text-accent-300 mb-2">1.</h3>
+                        <p class="text-lg font-semibold text-primary-title">Hybrid Monetization</p>
+                        <p class="text-sm text-neutral-700 mt-1">The new default model, layering <strong class="font-bold">IAP on top of Ads</strong> to capture value from both the 5% paying and 95% non-paying user segments.</p>
+                    </div>
+                    
+                    <div class="p-4 bg-neutral-100 rounded-lg border-t-4 border-accent-300 shadow-sm text-center">
+                        <h3 class="text-4xl font-extrabold text-accent-300 mb-2">2.</h3>
+                        <p class="text-lg font-semibold text-primary-title">AI-Driven Precision</p>
+                        <p class="text-sm text-neutral-700 mt-1">AI is essential for <strong class="font-bold">UA optimization</strong>, asset testing, and code iteration. Success = Product x <strong class="font-bold">Precision</strong> x Monetization.</p>
+                    </div>
+                    
+                    <div class="p-4 bg-neutral-100 rounded-lg border-t-4 border-accent-300 shadow-sm text-center">
+                        <h3 class="text-4xl font-extrabold text-accent-300 mb-2">3.</h3>
+                        <p class="text-lg font-semibold text-primary-title">LTV & Quality Focus</p>
+                        <p class="text-sm text-neutral-700 mt-1">Protecting LTV is paramount; studios must avoid disruptive ad experiences, as <strong class="font-bold">6-7%</strong> of users abandon a game after one poor exposure.</p>
+                    </div>
+
+                    <div class="p-4 bg-neutral-100 rounded-lg border-t-4 border-accent-300 shadow-sm text-center">
+                        <h3 class="text-4xl font-extrabold text-accent-300 mb-2">4.</h3>
+                        <p class="text-lg font-semibold text-primary-title">Global Center Shift</p>
+                        <p class="text-sm text-neutral-700 mt-1">Vietnam is a key accelerator in APAC, which is projected to drive the app economy to <strong class="font-bold">$750 Billion</strong> by 2030, shifting the industry's center of gravity.</p>
+                    </div>
+
+                </div>
+            </div>
+            <!-- END Conclusion -->
+
+        </div>
+    </main>
+
+    <footer class="text-center py-8 bg-primary-900 text-white text-sm border-t border-neutral-200 mt-8">
+        <div class="container mx-auto px-6 space-y-4">
+            <!-- Footer Logo -->
+            <div class="logo-wrapper mx-auto">
+                <img src="https://raw.githubusercontent.com/jgezquerra89/momentumlogos/main/Pulse.png"
+                     alt="MOMENTUM Pulse Logo"
+                     class="w-full h-auto object-contain"
+                     style="max-height: 40px;"> <!-- Reduced size for footer -->
+            </div>
+
+            <!-- Contact Link -->
+            <p>
+                <a href="https://www.momentumgamesconsulting.com/quote" 
+                   target="_blank" 
+                   class="font-bold text-accent-300 hover:text-white transition-colors">
+                    Contact
+                </a>
+            </p>
+
+            <!-- Data Source Text -->
+            <p class="text-xs text-neutral-400">
+                Data synthesized from industry reports, experts, and on-the-ground studio analysis.
+            </p>
+
+            <p class="text-xs text-neutral-400">
+                This is a non-commercial infographic created for informational purposes. No SVG or Mermaid JS used in construction.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Doughnut/Pie chart configurations: Disables X and Y axes
+        const pieDoughnutScales = {
+            x: {
+                display: false,
+            },
+            y: {
+                display: false,
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // UPDATED PALETTE: Uses brand colors (Teal/Dark Teal/Soft Cyan)
+            const palette = ['#1ac7c3', '#0d1b21', '#28e9e4', '#4ddcd9', '#0d5554', '#ffffff'];
+
+            const globalTooltipCallback = function(tooltipItems) {
+                const item = tooltipItems[0];
+                let label = item.chart.data.labels[item.dataIndex];
+                if (Array.isArray(label)) {
+                    return label.join(' ');
+                } else {
+                    return label;
+                }
+            };
+            
+            const globalChartOptions = (legendDisplay = true, showScales = true) => ({
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: legendDisplay,
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                family: 'Roboto', 
+                                size: 14,
+                            }
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            title: globalTooltipCallback
+                        },
+                        bodyFont: {
+                            family: 'Roboto',
+                        },
+                        titleFont: {
+                            family: 'Roboto',
+                        }
+                    }
+                },
+                scales: showScales ? {
+                    x: {
+                        ticks: {
+                            font: {
+                                family: 'Roboto',
+                            }
+                        },
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        ticks: {
+                            font: {
+                                family: 'Roboto',
+                            }
+                        },
+                        grid: {
+                            color: '#F3F4F6'
+                        }
+                    }
+                } : pieDoughnutScales
+            });
+
+            if (document.getElementById('revenueChart')) {
+                const ctx = document.getElementById('revenueChart').getContext('2d');
+                // Updated projection: Vietnam's market will exceed $430M in 2025 and continue to climb.
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['2023', '2024', '2025', '2026', '2027', '2028'],
+                        datasets: [{
+                            label: 'Projected Revenue (in $M)',
+                            data: [350, 430, 472, 520, 570, 620], // Adjusted to reflect $472M current size
+                            backgroundColor: 'rgba(26, 199, 195, 0.1)', // Light teal fill
+                            borderColor: palette[0],
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.3
+                        }]
+                    },
+                    options: globalChartOptions(false, true) // Line charts need scales
+                });
+            }
+
+            if (document.getElementById('ageChart')) {
+                const ctx = document.getElementById('ageChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['18-24 (Gen Z)', '25-34', '35-44', '45+'],
+                        datasets: [{
+                            label: 'Age Group',
+                            data: [31, 28, 22, 19],
+                            backgroundColor: [palette[0], palette[2], palette[3], palette[4]],
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: globalChartOptions(true, false) // Scales removed
+                });
+            }
+
+            if (document.getElementById('genderChart')) {
+                const ctx = document.getElementById('genderChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Male', 'Female'],
+                        datasets: [{
+                            label: 'Gender',
+                            data: [53, 47],
+                            backgroundColor: [palette[0], palette[2]],
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: globalChartOptions(true, false) // Scales removed
+                });
+            }
+
+            if (document.getElementById('locationChart')) {
+                const ctx = document.getElementById('locationChart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Urban', 'Rural'],
+                        datasets: [{
+                            label: 'Location',
+                            data: [65, 35],
+                            backgroundColor: [palette[0], palette[2]],
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: globalChartOptions(true, false) // Scales removed
+                });
+            }
+
+            if (document.getElementById('platformChart')) {
+                const ctx = document.getElementById('platformChart').getContext('2d');
+                // Updated platform data: Mobile $150M, PC/Console $322M (Total $472M)
+                const mobileRevenue = 150;
+                const pcConsoleRevenue = 322;
+                const totalRevenue = mobileRevenue + pcConsoleRevenue;
+                const mobilePercentage = (mobileRevenue / totalRevenue) * 100;
+                const pcConsolePercentage = (pcConsoleRevenue / totalRevenue) * 100;
+
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Mobile Games ($150M)', 'PC/Console Games ($322M)'],
+                        datasets: [{
+                            label: 'Domestic Revenue Share',
+                            data: [mobilePercentage, pcConsolePercentage],
+                            backgroundColor: [palette[0], palette[2]],
+                            borderColor: '#ffffff',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: globalChartOptions(true, false) // Scales removed
+                });
+            }
+            
+            if (document.getElementById('paymentChart')) {
+                const ctx = document.getElementById('paymentChart').getContext('2d');
+                
+                // Updated payment breakdown
+                new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['E-Wallets (31%)', 'Bank Cards (27%)', 'Bank Transfer (21%)', 'Cash (18%)'],
+                        datasets: [{
+                            label: 'Payment Method Usage',
+                            data: [31, 27, 21, 18],
+                            backgroundColor: [palette[0], palette[2], palette[3], palette[4]],
+                            borderRadius: 4
+                        }]
+                    },
+                    options: globalChartOptions(true, false) // Scales removed
+                });
+            }
+        });
+    </script>
+</div>
